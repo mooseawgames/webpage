@@ -1,14 +1,14 @@
 {
   "site": {
-    "title": "Power AI - A Free AI SaaS Website Template built with Astro",
-    "base_url": "https://powerai-astro.pages.dev/",
+    "title": "Mooseaw Games",
+    "base_url": "https://www.mooseawgames.com/",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
     "logo": "/images/logo.png",
-    "logo_width": "137",
-    "logo_height": "46",
-    "logo_text": "Power AI"
+    "logo_width": "375",
+    "logo_height": "70",
+    "logo_text": "Mooseaw Games"
   },
 
   "settings": {
@@ -23,16 +23,15 @@
     "contact_form_action": "#",
     "apply_form_action": "#",
     "newsletter_form_action": "#",
-    "footer_text": "Own traditional and AI search with a powerful platform",
-    "mail": "john@example.com",
-    "phone": "(+1) 123-346-7890",
-    "copyright": "Designed and Developed by [Sitepins - a Git-based CMS for Static Sites.](https://sitepins.com)"
+    "footer_text": "",
+    "mail": "support@mooseawgames.com",
+    "copyright": ""
   },
 
   "navigation_button": {
-    "enable": true,
-    "label": "Edit with Sitepins",
-    "link": "https://app.sitepins.com/new/clone?name=PoweraiAstro&repository=https://github.com/sitepins/powerai-astro&aff=poweraiastro"
+    "enable": false,
+    "label": "",
+    "link": ""
   },
 
   "google_tag_manager": {
@@ -43,6 +42,6 @@
   "metadata": {
     "meta_author": "Sitepins",
     "meta_image": "/images/og-image.png",
-    "meta_description": "PowerAI Astro is a free, dark-themed AI SaaS website template built with Astro. It has 15+ pre-built pages, 47 components and shortcodes."
+    "meta_description": ""
   }
 }

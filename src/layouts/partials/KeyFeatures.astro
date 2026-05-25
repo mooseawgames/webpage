@@ -5,6 +5,7 @@ import theme from "@/config/theme.json";
 interface Props {
   data: any;
 }
+
 const { data } = Astro.props;
 const { badge, title, features } = data.frontmatter;
 const primaryColor = theme?.colors?.default?.theme_color?.primary || "#9A4DFE";
@@ -57,89 +58,127 @@ const uid = `kf-${Math.random().toString(36).slice(2, 8)}`;
 
           <!-- Right: Feature cards -->
           <div id={`kf-right-${uid}`} style="opacity:0">
-            {features.map((feature: any, index: number) => (
-              <>
-                <!-- Intersection sentinel -->
-                <div
-                  class="kf-sentinel h-px"
-                  data-kf-index={index}
-                  aria-hidden="true"
-                />
-                <div
-                  class="kf-card border border-border/6 bg-card rounded-4xl p-2.5 md:sticky md:top-30 mb-2.5"
-                  style="opacity:0"
-                  data-kf-index={index}
-                >
-                  <div class="p-7.5 pb-12.5 lg:w-2/3">
-                    <h2 class="text-h4 font-medium mb-2">{feature.title}</h2>
-                    <p class="text-gray mb-5">{feature.content}</p>
-                    <ul class="flex flex-col gap-y-1 list-disc list-inside">
-                      {feature.bullet_points.map((point: string) => (
-                        <li class="text-text font-medium">{point}</li>
-                      ))}
-                    </ul>
+            {features.map((feature: any, index: number) => {
+              const isVideo = feature.image?.toLowerCase().endsWith(".mp4");
+              const isPortrait = feature.media_aspect === "portrait";
+
+              // Portrait media sits to the right of the text.
+              // Landscape media stacks below the text so it can use the full card width.
+              const cardGridClass = isPortrait
+                ? "grid lg:grid-cols-[minmax(0,1fr)_260px] gap-6 items-start p-7.5"
+                : "flex flex-col gap-6 p-7.5";
+
+              const mediaClass = isPortrait
+                ? "rounded-3xl object-contain relative z-1 w-full aspect-[9/16] bg-black"
+                : isVideo
+                  ? "rounded-3xl object-contain relative z-1 w-full aspect-[16/9] bg-black"
+                  : "rounded-3xl object-cover relative z-1 w-full aspect-[16/9]";
+
+              return (
+                <>
+                  <!-- Intersection sentinel -->
+                  <div
+                    class="kf-sentinel h-px"
+                    data-kf-index={index}
+                    aria-hidden="true"
+                  />
+
+                  <div
+                    class="kf-card border border-border/6 bg-card rounded-4xl p-2.5 md:sticky md:top-30 mb-2.5"
+                    style="opacity:0"
+                    data-kf-index={index}
+                  >
+                    <div class={cardGridClass}>
+                      <div>
+                        <h2 class="text-h4 font-medium mb-2">{feature.title}</h2>
+                        <p class="text-gray mb-5">{feature.content}</p>
+
+                        {feature.bullet_points?.length > 0 && (
+                          <ul class="flex flex-col gap-y-1 list-disc list-inside">
+                            {feature.bullet_points.map((point: string) => (
+                              <li class="text-text font-medium">{point}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+
+                      <!-- CardShape inline -->
+                      <div class="rounded-3xl bg-card/60 relative p-3 backdrop-blur-2xl overflow-hidden lg:justify-self-end w-full">
+                        <svg
+                          class="absolute top-0 right-0"
+                          width="315"
+                          height="273"
+                          viewBox="0 0 315 273"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g filter="url(#filter0_f_kf_top)">
+                            <circle cx="243" cy="30" r="123" fill="url(#paint0_kf_top)" fill-opacity="0.7" />
+                          </g>
+                          <defs>
+                            <filter id="filter0_f_kf_top" x="0" y="-213" width="486" height="486" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                              <feGaussianBlur stdDeviation="60" result="effect1_foregroundBlur" />
+                            </filter>
+                            <linearGradient id="paint0_kf_top" x1="120" y1="153" x2="366" y2="153" gradientUnits="userSpaceOnUse">
+                              <stop stop-color={primaryColor} />
+                              <stop offset="1" stop-color={secondaryColor} />
+                            </linearGradient>
+                          </defs>
+                        </svg>
+
+                        {isVideo ? (
+                          <video
+                            src={feature.image}
+                            class={mediaClass}
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata"
+                          />
+                        ) : (
+                          <img
+                            src={feature.image}
+                            alt={feature.title}
+                            width={570}
+                            height={360}
+                            class={mediaClass}
+                            loading="lazy"
+                            onerror="this.style.display='none'"
+                          />
+                        )}
+
+                        <svg
+                          class="absolute bottom-0 left-0"
+                          width="301"
+                          height="244"
+                          viewBox="0 0 301 244"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g filter="url(#filter0_f_kf_bot)">
+                            <circle cx="58" cy="243" r="123" fill="url(#paint0_kf_bot)" fill-opacity="0.7" />
+                          </g>
+                          <defs>
+                            <filter id="filter0_f_kf_bot" x="-185" y="0" width="486" height="486" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                              <feGaussianBlur stdDeviation="60" result="effect1_foregroundBlur" />
+                            </filter>
+                            <linearGradient id="paint0_kf_bot" x1="-65" y1="366" x2="181" y2="366" gradientUnits="userSpaceOnUse">
+                              <stop stop-color={primaryColor} />
+                              <stop offset="1" stop-color={secondaryColor} />
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                      </div>
+                    </div>
                   </div>
-                  <!-- CardShape inline -->
-                  <div class="rounded-3xl bg-card/60 relative p-3 backdrop-blur-2xl overflow-hidden">
-                    <svg
-                      class="absolute top-0 right-0"
-                      width="315"
-                      height="273"
-                      viewBox="0 0 315 273"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g filter="url(#filter0_f_kf_top)">
-                        <circle cx="243" cy="30" r="123" fill="url(#paint0_kf_top)" fill-opacity="0.7" />
-                      </g>
-                      <defs>
-                        <filter id="filter0_f_kf_top" x="0" y="-213" width="486" height="486" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                          <feGaussianBlur stdDeviation="60" result="effect1_foregroundBlur" />
-                        </filter>
-                        <linearGradient id="paint0_kf_top" x1="120" y1="153" x2="366" y2="153" gradientUnits="userSpaceOnUse">
-                          <stop stop-color={primaryColor} />
-                          <stop offset="1" stop-color={secondaryColor} />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <img
-                      src={feature.image}
-                      alt="Feature"
-                      width={570}
-                      height={360}
-                      class="rounded-3xl object-cover relative z-1"
-                      loading="lazy"
-                      onerror="this.style.display='none'"
-                    />
-                    <svg
-                      class="absolute bottom-0 left-0"
-                      width="301"
-                      height="244"
-                      viewBox="0 0 301 244"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g filter="url(#filter0_f_kf_bot)">
-                        <circle cx="58" cy="243" r="123" fill="url(#paint0_kf_bot)" fill-opacity="0.7" />
-                      </g>
-                      <defs>
-                        <filter id="filter0_f_kf_bot" x="-185" y="0" width="486" height="486" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                          <feGaussianBlur stdDeviation="60" result="effect1_foregroundBlur" />
-                        </filter>
-                        <linearGradient id="paint0_kf_bot" x1="-65" y1="366" x2="181" y2="366" gradientUnits="userSpaceOnUse">
-                          <stop stop-color={primaryColor} />
-                          <stop offset="1" stop-color={secondaryColor} />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-                </div>
-              </>
-            ))}
+                </>
+              );
+            })}
           </div>
         </div>
       </div>

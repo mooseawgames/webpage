@@ -1,22 +1,25 @@
 ---
 enable: true
-title: The Clarity You’ve Been Looking For
-subtitle: Find answers to common questions about Inno and our services.
+title: Frequently Asked Questions
+subtitle: Find answers to common questions about Mooseaw Games.
 badge: Frequently Asked Questions
 
 faq_list:
-  - question: What is the purpose of this platform?
-    answer: Our platform is designed to provide users with comprehensive tools and resources to enhance their productivity and collaboration.
+  - question: Who are we?
+    answer: Mooseaw Games is an independent game studio founded by developers from Thailand, with our business based in the United States. We focus on creating character-driven games with cinematic presentation, storytelling, and detailed in-engine scenes.
 
-  - question: How can I create an account?
-    answer: You can create an account by clicking on the "Sign Up" button at the top right corner of our homepage and filling out the registration form.
+  - question: Who is on the team?
+    answer: We are currently a small two-person team.
 
-  - question: Is there a free trial available?
-    answer: Yes, we offer a 14-day free trial for new users. You can sign up for the trial without providing any payment information.
+  - question: What is the timeline for the game?
+    answer: Our current plan is to officially announce the game in June, followed by a playable demo in late August. The schedule may change depending on development progress, but we will post major updates through our website and mailing list.
 
-  - question: How do I reset my password?
-    answer: To reset your password, click on the "Forgot Password" link on the login page and follow the instructions sent to your registered email address.
+  - question: Where can I buy the game?
+    answer: The game will be available on Steam. We currently do not plan to sell the game directly on our website.
 
-  - question: Where can I find support if I encounter issues?
-    answer: You can reach out to our support team via the "Contact Us" page or by emailing
+  - question: Will there be a Patreon or subscription model?
+    answer: No. We do not plan to use Patreon or a subscription model. Our goal is to sell a finished game, not ongoing subscription content.
+
+  - question: Do you have a mailing list?
+    answer: Yes. Our mailing list is for important announcements only, such as the official reveal, demo release, Steam page launch, and full release date. We will not spam your inbox.
 ---

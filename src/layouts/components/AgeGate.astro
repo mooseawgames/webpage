@@ -1,0 +1,106 @@
+<div id="age-gate" class="age-gate hidden">
+  <div class="age-gate-box">
+    <h2>Adults Only</h2>
+
+    <p>
+      This website contains information about an 18+ adult game.
+    </p>
+
+    <p>
+      By entering, you confirm that you are at least 18 years old or the age of majority in your location.
+    </p>
+
+    <div class="age-gate-buttons">
+      <button id="age-enter" type="button">Enter Site</button>
+      <a href="https://www.google.com" id="age-leave">Leave</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .age-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0, 0, 0, 0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .age-gate.hidden {
+    display: none;
+  }
+
+  .age-gate-box {
+    width: 100%;
+    max-width: 520px;
+    background: #120d18;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 24px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+  }
+
+  .age-gate-box h2 {
+    margin: 0 0 16px;
+    font-size: 32px;
+    line-height: 1.1;
+  }
+
+  .age-gate-box p {
+    color: #d8d1df;
+    line-height: 1.6;
+    margin: 0 0 14px;
+  }
+
+  .age-gate-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .age-gate-buttons button,
+  .age-gate-buttons a {
+    min-width: 130px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #age-enter {
+    border: 0;
+    background: #c084fc;
+    color: #100818;
+  }
+
+  #age-leave {
+    background: #2b2433;
+    color: white;
+  }
+</style>
+
+<script is:inline>
+  const ageGate = document.getElementById("age-gate");
+  const enterButton = document.getElementById("age-enter");
+
+  const accepted = localStorage.getItem("mooseaw_age_gate_accepted");
+
+  if (accepted !== "true") {
+    ageGate?.classList.remove("hidden");
+    document.documentElement.style.overflow = "hidden";
+  }
+
+  enterButton?.addEventListener("click", () => {
+    localStorage.setItem("mooseaw_age_gate_accepted", "true");
+    ageGate?.classList.add("hidden");
+    document.documentElement.style.overflow = "";
+  });
+</script>

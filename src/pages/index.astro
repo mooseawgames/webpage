@@ -12,6 +12,7 @@ import Testimonials from "@/partials/Testimonials";
 import TrustedClients from "@/partials/TrustedClients";
 import WhyChooseUs from "@/partials/WhyChooseUs.astro";
 import { getListPage } from "@/lib/contentParser";
+import MailingList from "@/components/MailingListPopup.astro";
 
 const homepage = await getListPage("homepage/-index.md");
 const trusted_clients = await getListPage("sections/trusted-clients.md");
@@ -29,14 +30,7 @@ const { banner } = homepage.frontmatter;
 
 <Base>
   <Hero data={banner} />
-  <TrustedClients data={trusted_clients} client:visible />
   <KeyFeatures data={key_features} />
-  <Statistics data={statistics} client:visible />
-  <EssentialFeatures data={essential_features} />
-  <WhyChooseUs data={whyChooseUs} />
-  <Integration data={integration} client:visible />
-  <Pricing data={pricing} client:visible />
-  <Testimonials data={testimonial} client:visible />
   <FAQ data={faq} client:visible />
   <CallToAction data={callToAction} />
 </Base>
